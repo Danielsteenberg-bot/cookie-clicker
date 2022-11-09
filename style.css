@@ -1,3 +1,7 @@
+body{
+    background-color:beige;
+}
+
 .cookie-wrapper{
     display: grid;
     justify-content: center;
@@ -44,13 +48,19 @@
     align-items: center;
     background-color: grey;
     color: white;
+    opacity: 0.6;
 }
 
 .active{
     background-color: brown;
+    opacity: 1;
 }
 
 .power-icon-container{
     font-size: 22px;
     padding: 10px;
+}
+
+.active:hover{
+    transform: translate(0.9);
 }

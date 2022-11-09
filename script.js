@@ -6,46 +6,117 @@ const power3 = document.querySelector(".wand")
 
 /* Start med at sætte count til 0 */
 
+let i = 0;  
 
-for (var i = 0; i > 0; i++) {
-  i++
-}
+const powerUP = [
+    {
+        "cost" : 15,
+        "name" : "Auto clicker",
+        "icon" : "ghost" 
+    },
+    {
+        "cost" : 30,
+        "name" : "Auto clicker",
+        "icon" : "fist" 
+    },
+    {
+        "cost" : 45,
+        "name" : "Auto clicker",
+        "icon" : "ghost" 
+    }
+]
 
-const amount = i
 
 
 cookie.addEventListener("click", () =>{
+    i +=1;
+    let total = i;
 
 /* +1 per click og skriv dataene i html */
-console.log(i)
-    i +=1;
-        cookieAmount.innerHTML = i;
 
-        cookie.classList.toggle("clicked");
+        cookieAmount.innerHTML = `${total} Cookies`;
 
-        if(i == 15){
-            power1.classList.add("active")
-            power1.addEventListener("click",autoClick)
-        }
+        /* cookie.classList.toggle("clicked"); */
 
-        if(i == 30){
-            power2.classList.add("active")
-            power2.addEventListener("click",powerClick)
-
+    /* Første power Up */
+        if(total > powerUP[0].cost){
+            let clicked =  false;
             
+            console.log("PRE CLICKED  "+clicked);
+
+            power1.classList.add("active");
+
+            /* Check om vi har klassen så vi kan ak */
+            if(power1.classList.contains("active")){
+                i+=1;
+
+
+                /* tilføj mulighed for at clicke på upgrades */
+                power1.addEventListener("click", () => {
+                    power1.classList.remove("active");
+                    clicked = true;
+
+                    /* Skriv data hvis du clicker */
+                    if(clicked = true){
+                        cookieAmount.innerHTML = `${i-powerUP[0].cost} Cookies`;
+                        console.log(cookieAmount.innerHTML = `${i-powerUP[0].cost}`)
+                        total =  i-powerUP[0].cost 
+                        i+=1;                                 
+                    }
+                })                
+            }            
         }
 
-        if(i == 45){
-            power3.classList.add("active")
-            power3.addEventListener("click",freeClick)
+   /*      /* Auto click powerUp */
+        if(total > powerUP[1].cost){
+            power2.classList.add("active")
+            if(power2.classList.contains("active")){
 
+
+                 power2.addEventListener("click", () => {
+                    total=i-powerUP[1].cost;
+                    cookieAmount.innerHTML = `${total} Cookies`;
+
+                    i+=1
+                    power2.classList.remove("active");
+                    total = i-powerUP[1].cost;
+                    setInterval(autoClick, 1000);
+                    
+                    function autoClick(){
+                        total+=1;
+                        cookieAmount.innerHTML = `${total} Cookies`;
+                
+                    } 
+                })
+            }        
         }
-    })
 
-    function autoClick (){
-        console.log("første power up here")
+
+    if(total > 45){
+        power3.classList.add("active")
+        if(power3.classList.contains("active")){
+            console.log(total+=i*2)
+
+            power3.addEventListener("click", () => {
+                total=i-powerUP[2].cost;
+                cookieAmount.innerHTML = `${total*2} Cookies`;
+                power2.classList.remove("active");
+
+            })
+        }        
     }
+})
+ 
+
+
+ 
+    function autoClick(){
+        total+=1;
+        cookieAmount.innerHTML = `${total} Cookies`;
+
+    } 
     
+
     function powerClick(){
         console.log("anden power up here")
     }
